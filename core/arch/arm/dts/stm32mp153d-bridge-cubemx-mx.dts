@@ -11,6 +11,7 @@
 /dts-v1/;
 #include <dt-bindings/pinctrl/stm32-pinfunc.h>
 #include <dt-bindings/clock/stm32mp1-clksrc.h>
+#include <dt-bindings/soc/stm32mp15-etzpc.h>
 
 #include "stm32mp153.dtsi"
 #include "stm32mp15xd.dtsi"
