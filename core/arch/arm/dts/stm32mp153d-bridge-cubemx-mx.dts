@@ -44,8 +44,6 @@
 
         aliases {
                 serial0 = &uart4;
-                serial1 = &uart7;
-                mmc0 = &sdmmc1;
         };
 
         chosen {
