@@ -24,6 +24,45 @@
 	model = "STMicroelectronics custom STM32CubeMX board - openstlinux-5.15-yocto-kirkstone-mp1-v22.06.15";
 	compatible = "st,stm32mp153d-bridge-cubemx-mx", "st,stm32mp153";
 
+	memory@c0000000 {
+		device_type = "memory";
+		reg = <0xc0000000 0x20000000>;
+
+		/* USER CODE BEGIN memory */
+		/* USER CODE END memory */
+	};
+
+	reserved-memory {
+		#address-cells = <1>;
+		#size-cells = <1>;
+		ranges;
+
+		/* USER CODE BEGIN reserved-memory */
+		/* USER CODE END reserved-memory */
+	};
+
+	/* USER CODE BEGIN root */
+	/* USER CODE END root */
+
+	clocks {
+		/* USER CODE BEGIN clocks */
+		/* USER CODE END clocks */
+
+		clk_lse: clk-lse {
+			st,digbypass;
+
+			/* USER CODE BEGIN clk_lse */
+			/* USER CODE END clk_lse */
+		};
+
+		clk_hse: clk-hse {
+			st,bypass;
+
+			/* USER CODE BEGIN clk_hse */
+			/* USER CODE END clk_hse */
+		};
+	};
+
 	aliases {
 		serial0 = &uart4;
 		serial1 = &uart7;
@@ -50,14 +89,6 @@
 
 	/* USER CODE BEGIN pinctrl */
 	/* USER CODE END pinctrl */
-};
-
-&cpu0{
-	cpu-supply = <&vddcore>;
-};
-
-&cpu1{
-	cpu-supply = <&vddcore>;
 };
 
 &etzpc{
@@ -103,5 +134,106 @@
 	/* USER CODE END etzpc */
 };
 /* USER CODE BEGIN addons */
+&pwr_regulators{
+	status = "okay";
+
+	/* USER CODE BEGIN pwr_regulators */
+	/* USER CODE END pwr_regulators */
+};
+
+&rcc{
+	pinctrl-names = "default";
+	pinctrl-0 = <&rcc_pins_mx>;
+	status = "okay";
+
+	/* USER CODE BEGIN rcc */
+	/* USER CODE END rcc */
+
+	st,clksrc = <
+		CLK_MPU_PLL1P
+		CLK_AXI_PLL2P
+		CLK_MCU_PLL3P
+		CLK_PLL12_HSE
+		CLK_PLL3_HSE
+		CLK_PLL4_HSI
+		CLK_RTC_LSE
+		CLK_MCO1_LSE
+		CLK_MCO2_DISABLED
+	>;
+	st,clkdiv = <
+		1 		/*MPU*/
+		0 		/*AXI*/
+		0 		/*MCU*/
+		1 		/*APB1*/
+		1 		/*APB2*/
+		1 		/*APB3*/
+		1 		/*APB4*/
+		2 		/*APB5*/
+		0 		/*RTC*/
+		0 		/*MCO1*/
+		0 		/*MCO2*/
+	>;
+	st,pkcs = <
+		CLK_CKPER_DISABLED
+		CLK_ETH_DISABLED
+		CLK_SDMMC12_PLL3R
+		CLK_STGEN_HSI
+		CLK_USBPHY_HSE
+		CLK_SPI2S1_PLL4P
+		CLK_SPI2S23_PLL4P
+		CLK_SPI45_DISABLED
+		CLK_SPI6_DISABLED
+		CLK_I2C46_PCLK5
+		CLK_SDMMC3_PLL3R
+		CLK_USBO_USBPHY
+		CLK_ADC_DISABLED
+		CLK_CEC_DISABLED
+		CLK_I2C12_PCLK1
+		CLK_I2C35_DISABLED
+		CLK_UART1_DISABLED
+		CLK_UART24_PCLK1
+		CLK_UART35_PCLK1
+		CLK_UART6_PCLK2
+		CLK_UART78_PCLK1
+		CLK_SPDIF_DISABLED
+		CLK_SAI1_DISABLED
+		CLK_SAI2_DISABLED
+		CLK_SAI3_DISABLED
+		CLK_SAI4_DISABLED
+		CLK_RNG1_CSI
+		CLK_LPTIM1_DISABLED
+		CLK_LPTIM23_DISABLED
+		CLK_LPTIM45_DISABLED
+	>;
+	pll1:st,pll@0 {
+		compatible = "st,stm32mp1-pll";
+		reg = <0>;
+		cfg = < 1 65 0 1 1 PQR(1,0,0) >;
+		frac = < 0x1555 >;
+	};
+	pll2:st,pll@1 {
+		compatible = "st,stm32mp1-pll";
+		reg = <1>;
+		cfg = < 2 65 1 1 0 PQR(1,0,1) >;
+		frac = < 0x1400 >;
+	};
+	pll3:st,pll@2 {
+		compatible = "st,stm32mp1-pll";
+		reg = <2>;
+		cfg = < 1 49 2 1 2 PQR(1,0,1) >;
+	};
+	pll4:st,pll@3 {
+		compatible = "st,stm32mp1-pll";
+		reg = <3>;
+		cfg = < 3 24 1 1 7 PQR(1,0,0) >;
+	};
+};
+
+&bsec{
+	status = "okay";
+
+	/* USER CODE BEGIN bsec */
+	/* USER CODE END bsec */
+};
 /* USER CODE END addons */
 
