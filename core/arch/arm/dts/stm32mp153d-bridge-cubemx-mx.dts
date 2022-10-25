@@ -72,6 +72,14 @@
 
 }; /*root*/
 
+&clk_hse {
+        st,bypass;
+};
+
+&clk_lse {
+        st,digbypass;
+};
+
 &pinctrl {
         i2c4_pins_mx: i2c4_mx-0 {
                 pins {
@@ -328,14 +336,22 @@
 //      /* USER CODE END iwdg2 */
 // };
 
-&pwr_regulators{
-        status = "okay";
+&osc_calibration {
+	csi-calibration {
+		status = "okay";
+	};
 
+	hsi-calibration {
+		status = "okay";
+	};
+};
+
+&pwr_regulators{
         /* USER CODE BEGIN pwr_regulators */
         system_suspend_supported_soc_modes = <
         STM32_PM_CSLEEP_RUN
         STM32_PM_CSTOP_ALLOW_LP_STOP
-                STM32_PM_CSTOP_ALLOW_LPLV_STOP
+        STM32_PM_CSTOP_ALLOW_LPLV_STOP
     >;
     system_off_soc_mode = <STM32_PM_SHUTDOWN>;
         vdd-supply = <&vdd>;
@@ -344,11 +360,6 @@
 };
 
 &rcc{
-        status = "okay";
-
-        /* USER CODE BEGIN rcc */
-        /* USER CODE END rcc */
-
         st,clksrc = <
                 CLK_MPU_PLL1P
                 CLK_AXI_PLL2P
@@ -447,11 +458,6 @@
         pinctrl-names = "default";
         pinctrl-0 = <&uart4_pins_mx>;
         status = "okay";
-
-        /* USER CODE BEGIN uart4 */
-        /delete-property/dmas;
-        /delete-property/dma-names;
-        /* USER CODE END uart4 */
 };
 
 /* USER CODE BEGIN addons */
