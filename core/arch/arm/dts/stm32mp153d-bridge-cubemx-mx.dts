@@ -22,7 +22,7 @@
 /* USER CODE END includes */
 
 / {
-        model = "Higgsone Bridge v2.0";
+        model = "Higgsone Bridge v2.0 (OP-TEE)";
         compatible = "st,stm32mp153d-bridge-cubemx-mx", "st,stm32mp153";
 
         memory@c0000000 {
