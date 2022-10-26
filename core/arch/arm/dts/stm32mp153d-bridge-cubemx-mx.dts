@@ -50,26 +50,6 @@
                 stdout-path = "serial0:115200n8";
         };
         /* USER CODE END root */
-
-        clocks {
-                /* USER CODE BEGIN clocks */
-                /* USER CODE END clocks */
-
-                clk_lse: clk-lse {
-                        st,digbypass;
-
-                        /* USER CODE BEGIN clk_lse */
-                        /* USER CODE END clk_lse */
-                };
-
-                clk_hse: clk-hse {
-                        st,bypass;
-
-                        /* USER CODE BEGIN clk_hse */
-                        /* USER CODE END clk_hse */
-                };
-        };
-
 }; /*root*/
 
 &clk_hse {
@@ -187,6 +167,7 @@
         /*"Secured" peripherals*/
         DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_RNG1_ID, DECPROT_S_RW, DECPROT_UNLOCK)
+        DECPROT(STM32MP1_ETZPC_BKPSRAM_ID, DECPROT_S_RW, DECPROT_LOCK)
         /*"Mcu Isolation" peripherals*/
         DECPROT(STM32MP1_ETZPC_DMA2_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_SPI1_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
