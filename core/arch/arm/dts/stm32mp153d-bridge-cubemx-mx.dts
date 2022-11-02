@@ -50,15 +50,26 @@
                 stdout-path = "serial0:115200n8";
         };
         /* USER CODE END root */
+
+        clocks {
+		/* USER CODE BEGIN clocks */
+		/* USER CODE END clocks */
+
+		clk_lse: clk-lse {
+			st,digbypass;
+
+			/* USER CODE BEGIN clk_lse */
+			/* USER CODE END clk_lse */
+		};
+
+		clk_hse: clk-hse {
+			st,bypass;
+
+			/* USER CODE BEGIN clk_hse */
+			/* USER CODE END clk_hse */
+		};
+	};
 }; /*root*/
-
-&clk_hse {
-        st,bypass;
-};
-
-&clk_lse {
-        st,digbypass;
-};
 
 &pinctrl {
         i2c4_pins_mx: i2c4_mx-0 {
@@ -154,7 +165,6 @@
         /*"Non Secured" peripherals*/
         DECPROT(STM32MP1_ETZPC_DMA1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_DMAMUX_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
-        DECPROT(STM32MP1_ETZPC_HASH1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_I2C1_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_I2C4_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_SDMMC3_ID, DECPROT_NS_RW, DECPROT_UNLOCK)
@@ -167,6 +177,7 @@
         /*"Secured" peripherals*/
         DECPROT(STM32MP1_ETZPC_STGENC_ID, DECPROT_S_RW, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_RNG1_ID, DECPROT_S_RW, DECPROT_UNLOCK)
+        DECPROT(STM32MP1_ETZPC_HASH1_ID, DECPROT_S_RW, DECPROT_UNLOCK)
         /*"Mcu Isolation" peripherals*/
         DECPROT(STM32MP1_ETZPC_DMA2_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
         DECPROT(STM32MP1_ETZPC_SPI1_ID, DECPROT_MCU_ISOLATION, DECPROT_UNLOCK)
@@ -316,30 +327,26 @@
 //      /* USER CODE END iwdg2 */
 // };
 
-&osc_calibration {
-	csi-calibration {
-		status = "okay";
-	};
-
-	hsi-calibration {
-		status = "okay";
-	};
+&hash1{
+        status = "okay";
 };
 
 &pwr_regulators{
+        status = "okay";
         /* USER CODE BEGIN pwr_regulators */
         system_suspend_supported_soc_modes = <
-        STM32_PM_CSLEEP_RUN
-        STM32_PM_CSTOP_ALLOW_LP_STOP
-        STM32_PM_CSTOP_ALLOW_LPLV_STOP
-    >;
-    system_off_soc_mode = <STM32_PM_SHUTDOWN>;
+                STM32_PM_CSLEEP_RUN
+                STM32_PM_CSTOP_ALLOW_LP_STOP
+                STM32_PM_CSTOP_ALLOW_LPLV_STOP
+        >;
+        system_off_soc_mode = <STM32_PM_SHUTDOWN>;
         vdd-supply = <&vdd>;
         vdd_3v3_usbfs-supply = <&vdd_usb>;
         /* USER CODE END pwr_regulators */
 };
 
 &rcc{
+        status = "okay";
         st,clksrc = <
                 CLK_MPU_PLL1P
                 CLK_AXI_PLL2P
@@ -432,6 +439,10 @@
 
         /* USER CODE BEGIN rtc */
         /* USER CODE END rtc */
+};
+
+&tamp{
+        status = "okay";
 };
 
 &uart4{
