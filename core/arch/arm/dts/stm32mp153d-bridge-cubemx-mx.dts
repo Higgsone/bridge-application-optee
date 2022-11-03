@@ -22,7 +22,7 @@
 /* USER CODE END includes */
 
 / {
-        model = "Higgsone Bridge v2.0 (OP-TEE)";
+        model = "Higgsone Bridge v2.0 (OP-TEE r20)";
         compatible = "st,stm32mp153d-bridge-cubemx-mx", "st,stm32mp153";
 
         memory@c0000000 {
@@ -338,6 +338,17 @@
 
 &hash1{
         status = "okay";
+};
+
+
+&osc_calibration {
+	csi-calibration {
+		status = "okay";
+	};
+
+	hsi-calibration {
+		status = "okay";
+	};
 };
 
 &pwr_regulators{
