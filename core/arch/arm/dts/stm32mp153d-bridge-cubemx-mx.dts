@@ -22,12 +22,12 @@
 /* USER CODE END includes */
 
 / {
-        model = "Higgsone Bridge v2.0 (OP-TEE r24)";
+        model = "Higgsone Bridge v2.0 (OP-TEE r25)";
         compatible = "st,stm32mp153d-bridge-cubemx-mx", "st,stm32mp153";
 
         memory@c0000000 {
                 device_type = "memory";
-                reg = <0xc0000000 0x20000000>;
+                reg = <0xc0000000 0x10000000>;
 
                 /* USER CODE BEGIN memory */
                 /* USER CODE END memory */
